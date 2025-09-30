@@ -1,26 +1,96 @@
 version: 2
 
 sources:
-  - name: raw   # Chose an appropriate name to indicate the source of the data (e.g. S3, Onestream, mysql-S3)
-    description: "Raw data tables from Snowflake"  # Leave a description to provide context for the source
-    database: MOVIELENS  # Replace with your actual database name
-    schema: RAW      # Replace with your actual schema name (e.g., RAW, PUBLIC, etc.)
+  - name: raw_data
+    description: "Raw data sources including seed files"
+    database: DWH
+    schema: SEEDS
     
     tables:
-      - name: raw_genome_scores
-        description: "Raw genome scores data"
-        
-      - name: raw_genome_tags
-        description: "Raw genome tags data"
-        
-      - name: raw_links
-        description: "Raw links data"
-        
-      - name: raw_movies
-        description: "Raw movies data"
-        
-      - name: raw_ratings
-        description: "Raw ratings data"
-        
-      - name: raw_tags
-        description: "Raw tags data"
+      - name: cust_info
+        description: "Customer information from CRM system"
+        columns:
+          - name: cst_id
+            description: "Customer ID"
+          - name: cst_key
+            description: "Customer key"
+          - name: cst_firstname
+            description: "Customer first name"
+          - name: cst_lastname
+            description: "Customer last name"
+          - name: cst_marital_status
+            description: "Customer marital status"
+          - name: cst_gndr
+            description: "Customer gender"
+          - name: cst_create_date
+            description: "Customer creation date"
+      
+      - name: prd_info
+        description: "Product information from CRM system"
+        columns:
+          - name: prd_id
+            description: "Product ID"
+          - name: prd_key
+            description: "Product key"
+          - name: prd_nm
+            description: "Product name"
+          - name: prd_cost
+            description: "Product cost"
+          - name: prd_line
+            description: "Product line"
+          - name: prd_start_dt
+            description: "Product start date"
+          - name: prd_end_dt
+            description: "Product end date"
+      
+      - name: sales_details
+        description: "Sales details from CRM system"
+        columns:
+          - name: sls_ord_num
+            description: "Sales order number"
+          - name: sls_prd_key
+            description: "Sales product key"
+          - name: sls_cust_id
+            description: "Sales customer ID"
+          - name: sls_order_dt
+            description: "Sales order date"
+          - name: sls_ship_dt
+            description: "Sales ship date"
+          - name: sls_due_dt
+            description: "Sales due date"
+          - name: sls_sales
+            description: "Sales amount"
+          - name: sls_quantity
+            description: "Sales quantity"
+          - name: sls_price
+            description: "Sales price"
+      
+      - name: CUST_AZ12
+        description: "Customer data from ERP system"
+        columns:
+          - name: CID
+            description: "Customer ID"
+          - name: BDATE
+            description: "Birth date"
+          - name: GEN
+            description: "Gender"
+      
+      - name: LOC_A101
+        description: "Location data from ERP system"
+        columns:
+          - name: CID
+            description: "Customer ID"
+          - name: CNTRY
+            description: "Country"
+      
+      - name: PX_CAT_G1V2
+        description: "Product category data from ERP system"
+        columns:
+          - name: ID
+            description: "Category ID"
+          - name: CAT
+            description: "Category"
+          - name: SUBCAT
+            description: "Subcategory"
+          - name: MAINTENANCE
+            description: "Maintenance flag"

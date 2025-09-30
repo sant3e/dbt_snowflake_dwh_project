@@ -1,0 +1,90 @@
+version: 2
+
+seeds:
+  - name: cust_info
+    description: "Customer information from CRM system"
+    columns:
+      - name: cst_id
+        description: "Customer ID"
+      - name: cst_key
+        description: "Customer key"
+      - name: cst_firstname
+        description: "Customer first name"
+      - name: cst_lastname
+        description: "Customer last name"
+      - name: cst_marital_status
+        description: "Customer marital status"
+      - name: cst_gndr
+        description: "Customer gender"
+      - name: cst_create_date
+        description: "Customer creation date"
+  
+  - name: prd_info
+    description: "Product information from CRM system"
+    columns:
+      - name: prd_id
+        description: "Product ID"
+      - name: prd_key
+        description: "Product key"
+      - name: prd_nm
+        description: "Product name"
+      - name: prd_cost
+        description: "Product cost"
+      - name: prd_line
+        description: "Product line"
+      - name: prd_start_dt
+        description: "Product start date"
+      - name: prd_end_dt
+        description: "Product end date"
+  
+  - name: sales_details
+    description: "Sales details from CRM system"
+    columns:
+      - name: sls_ord_num
+        description: "Sales order number"
+      - name: sls_prd_key
+        description: "Sales product key"
+      - name: sls_cust_id
+        description: "Sales customer ID"
+      - name: sls_order_dt
+        description: "Sales order date"
+      - name: sls_ship_dt
+        description: "Sales ship date"
+      - name: sls_due_dt
+        description: "Sales due date"
+      - name: sls_sales
+        description: "Sales amount"
+      - name: sls_quantity
+        description: "Sales quantity"
+      - name: sls_price
+        description: "Sales price"
+  
+  - name: CUST_AZ12
+    description: "Customer data from ERP system"
+    columns:
+      - name: CID
+        description: "Customer ID"
+      - name: BDATE
+        description: "Birth date"
+      - name: GEN
+        description: "Gender"
+  
+  - name: LOC_A101
+    description: "Location data from ERP system"
+    columns:
+      - name: CID
+        description: "Customer ID"
+      - name: CNTRY
+        description: "Country"
+  
+  - name: PX_CAT_G1V2
+    description: "Product category data from ERP system"
+    columns:
+      - name: ID
+        description: "Category ID"
+      - name: CAT
+        description: "Category"
+      - name: SUBCAT
+        description: "Subcategory"
+      - name: MAINTENANCE
+        description: "Maintenance flag"
