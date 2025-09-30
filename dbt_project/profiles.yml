@@ -1,0 +1,13 @@
+imp_poc:
+  target: local_password
+  outputs:
+    local_password:
+      type: snowflake
+      account: "{{ env_var('SF_BASE_ACCOUNT') }}"
+      user: "{{ env_var('SF_USER_USERNAME') }}" 
+      password: "{{ env_var('SF_USER_PASSWORD') }}" 
+      role: "{{ env_var('SF_USER_ROLE') }}"
+      warehouse: "{{ env_var('SF_BASE_WAREHOUSE') }}"
+      database: "{{ env_var('SF_USER_DATABASE') }}"
+      schema: "{{ env_var('SF_USER_SCHEMA') }}"
+      threads: 8
