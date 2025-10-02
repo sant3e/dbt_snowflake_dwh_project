@@ -1,8 +1,8 @@
 version: 2
 
 models:
-  - name: crm_cust_info
-    description: "Bronze table for customer information from the CRM source - raw data from source system"
+  - name: raw_crm_cust_info
+    description: "Landing table for customer information from the CRM source - raw data from source system"
     columns:
       - name: cst_id
         description: "Customer ID"
@@ -31,8 +31,8 @@ models:
         description: "Customer creation date"
         data_type: date
 
-  - name: crm_prd_info
-    description: "Bronze table for product information from the CRM source - raw data from source system"
+  - name: raw_crm_prd_info
+    description: "Landing table for product information from the CRM source - raw data from source system"
     columns:
       - name: prd_id
         description: "Product ID"
@@ -61,8 +61,8 @@ models:
         description: "Product end date"
         data_type: timestamp
 
-  - name: crm_sales_details
-    description: "Bronze table for sales details from the CRM source - raw data from source system"
+  - name: raw_crm_sales_details
+    description: "Landing table for sales details from the CRM source - raw data from source system"
     columns:
       - name: sls_ord_num
         description: "Sales order number"
@@ -98,8 +98,8 @@ models:
         description: "Sales price"
         data_type: integer
 
-  - name: erp_CUST_AZ12
-    description: "Bronze table for customer data from the ERP source - raw data from source system"
+  - name: raw_erp_CUST_AZ12
+    description: "Landing table for customer data from the ERP source - raw data from source system"
     columns:
       - name: CID
         description: "Customer ID"
@@ -114,8 +114,8 @@ models:
         description: "Gender"
         data_type: varchar(50)
 
-  - name: erp_LOC_A101
-    description: "Bronze table for location data from the ERP source - raw data from source system"
+  - name: raw_erp_LOC_A101
+    description: "Landing table for location data from the ERP source - raw data from source system"
     columns:
       - name: CID
         description: "Customer ID"
@@ -126,8 +126,8 @@ models:
         description: "Country"
         data_type: varchar(50)
 
-  - name: erp_PX_CAT_G1V2
-    description: "Bronze table for product category data from the ERP source - raw data from source system"
+  - name: raw_erp_PX_CAT_G1V2
+    description: "Landing table for product category data from the ERP source - raw data from source system"
     columns:
       - name: ID
         description: "Category ID"

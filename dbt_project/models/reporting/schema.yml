@@ -1,8 +1,8 @@
 version: 2
 
 models:
-  - name: example_gold_model
-    description: "An example gold layer model - business-level aggregations and insights (view)"
+  - name: example_reporting_model
+    description: "An example reporting layer model - business-level aggregations and insights (view)"
     config:
       materialized: view
     columns:

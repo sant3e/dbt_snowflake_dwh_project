@@ -41,12 +41,12 @@ models:
   # Project structure
   imp_poc:
     # Sources are declared and documented in sources.yml
-    bronze:
-      +schema: BRONZE
+    landing:
+      +schema: LANDING
       +materialized: table
-    silver:
-      +schema: SILVER
+    staging:
+      +schema: STAGING
       +materialized: table
-    gold:
-      +schema: GOLD
+    reporting:
+      +schema: REPORTING
       +materialized: view

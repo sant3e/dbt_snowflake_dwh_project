@@ -15,7 +15,7 @@ CREATE DATABASE DWH;
 
 USE DWH;
 
--- Create your schemas (based on medalion architecture)
-CREATE SCHEMA bronze;
-CREATE SCHEMA silver;
-CREATE SCHEMA gold;
+-- Create your schemas (based on new layer architecture)
+CREATE SCHEMA landing;
+CREATE SCHEMA staging;
+CREATE SCHEMA reporting;

@@ -1,0 +1,143 @@
+version: 2
+
+models:
+  - name: stg_crm_cust_info
+    description: "Staging table for customer information - cleaned and transformed data from CRM source"
+    columns:
+      - name: cst_id
+        description: "Customer ID (deduplicated to keep most recent record)"
+        data_type: integer
+      - name: cst_key
+        description: "Customer key"
+        data_type: varchar(255)
+      - name: cst_firstname
+        description: "Customer first name (leading and trailing spaces removed)"
+        data_type: varchar(100)
+      - name: cst_lastname
+        description: "Customer last name (leading and trailing spaces removed)"
+        data_type: varchar(100)
+      - name: cst_marital_status
+        description: "Customer marital status (standardized: Single/Married/N/A)"
+        data_type: varchar(20)
+      - name: cst_gndr
+        description: "Customer gender (standardized: Male/Female/N/A)"
+        data_type: varchar(10)
+      - name: cst_create_date
+        description: "Customer creation date"
+        data_type: date
+      - name: dwh_create_date
+        description: "Date and time when the record was created in the data warehouse"
+        data_type: timestamp
+
+  - name: stg_crm_prd_info
+    description: "Staging table for product information - cleaned and transformed data from CRM source"
+    columns:
+      - name: prd_id
+        description: "Product ID"
+        data_type: integer
+      - name: cat_id
+        description: "Category ID extracted from prd_key (first 5 characters with hyphens replaced by underscores)"
+        data_type: varchar(255)
+      - name: prd_key
+        description: "Product key (from 7th character onwards with hyphens replaced by underscores)"
+        data_type: varchar(255)
+      - name: prd_nm
+        description: "Product name (leading and trailing spaces removed)"
+        data_type: varchar(255)
+      - name: prd_cost
+        description: "Product cost (NULL values replaced with 0)"
+        data_type: decimal
+      - name: prd_line
+        description: "Product line (standardized: Mountain/Road/Other Sales/Touring/N/A)"
+        data_type: varchar(20)
+      - name: prd_start_dt
+        description: "Product start date (converted to DATE type)"
+        data_type: date
+      - name: prd_end_dt
+        description: "Product end date (calculated using LEAD function to create continuous timeline)"
+        data_type: date
+      - name: dwh_create_date
+        description: "Date and time when the record was created in the data warehouse"
+        data_type: timestamp
+
+  - name: stg_crm_sales_details
+    description: "Staging table for sales details - cleaned and transformed data from CRM source with data quality enhancements"
+    columns:
+      - name: sls_ord_num
+        description: "Sales order number"
+        data_type: varchar(255)
+      - name: sls_prd_key
+        description: "Sales product key"
+        data_type: varchar(255)
+      - name: sls_cust_id
+        description: "Sales customer ID"
+        data_type: integer
+      - name: sls_order_dt
+        description: "Sales order date (converted from integer YYYYMMDD to DATE, invalid dates set to NULL)"
+        data_type: date
+      - name: sls_ship_dt
+        description: "Sales shipment date (converted from integer YYYYMMDD to DATE, invalid dates set to NULL)"
+        data_type: date
+      - name: sls_due_dt
+        description: "Sales due date (converted from integer YYYYMMDD to DATE, invalid dates set to NULL)"
+        data_type: date
+      - name: sls_sales
+        description: "Sales amount (corrected based on quantity and price)"
+        data_type: decimal
+      - name: sls_quantity
+        description: "Sales quantity"
+        data_type: integer
+      - name: sls_price
+        description: "Sales price (corrected if negative or if NULL/0)"
+        data_type: decimal
+      - name: dwh_create_date
+        description: "Date and time when the record was created in the data warehouse"
+        data_type: timestamp
+
+  - name: stg_erp_CUST_AZ12
+    description: "Staging table for ERP customer data - cleaned and transformed data from ERP source"
+    columns:
+      - name: CID
+        description: "Customer ID (transformed by removing first 3 characters if length is 13, or keeping as is if length is 10)"
+        data_type: varchar(255)
+      - name: BDATE
+        description: "Birth date (future dates set to NULL)"
+        data_type: date
+      - name: GEN
+        description: "Gender (standardized: Male/Female/N/A)"
+        data_type: varchar(10)
+      - name: dwh_create_date
+        description: "Date and time when the record was created in the data warehouse"
+        data_type: timestamp
+
+  - name: stg_erp_LOC_A101
+    description: "Staging table for ERP location data - cleaned and transformed data from ERP source"
+    columns:
+      - name: CID
+        description: "Customer ID (hyphens removed to connect with CRM customer data)"
+        data_type: varchar(255)
+      - name: CNTRY
+        description: "Country (standardized to consistent format: United States/United Kingdom/Germany/France/N/A)"
+        data_type: varchar(50)
+      - name: dwh_create_date
+        description: "Date and time when the record was created in the data warehouse"
+        data_type: timestamp
+
+  - name: stg_erp_PX_CAT_G1V2
+    description: "Staging table for ERP product category data - cleaned and transformed data from ERP source"
+    columns:
+      - name: ID
+        description: "Category ID"
+        data_type: varchar(255)
+      - name: CAT
+        description: "Category (leading and trailing spaces removed)"
+        data_type: varchar(255)
+      - name: SUBCAT
+        description: "Subcategory (leading and trailing spaces removed)"
+        data_type: varchar(255)
+      - name: MAINTENANCE
+        description: "Maintenance field (leading and trailing spaces removed)"
+        data_type: varchar(255)
+      - name: dwh_create_date
+        description: "Date and time when the record was created in the data warehouse"
+        data_type: timestamp
