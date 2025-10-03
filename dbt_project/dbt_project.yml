@@ -1,8 +1,8 @@
-name: 'imp_poc'
+name: 'dbt_snfk'
 version: '1.0.0'
 config-version: 2
 
-profile: 'imp_poc'
+profile: 'dbt_snfk'
 
 model-paths: ["models"]
 analysis-paths: ["analyses"]
@@ -26,26 +26,23 @@ seeds:
 
 # Snapshots configuration
 snapshots:
-  imp_poc:
-    +enabled: true
-    target_schema: SNAPSHOTS
+  +enabled: false
 
 models:
   # Global project-level configurations
   +packages: ['pandas', 'numpy', 'scikit-learn', 'statsmodels']
   
-  # dbt_artifacts package configuration (applies to the dbt_artifacts package models)
-  dbt_artifacts:
-    +schema: TECH
-  
   # Project structure
-  imp_poc:
+  dbt_snfk:
     # Sources are declared and documented in sources.yml
     landing:
       +schema: LANDING
       +materialized: table
     staging:
       +schema: STAGING
+      +materialized: table
+    mart:
+      +schema: MART
       +materialized: table
     reporting:
       +schema: REPORTING

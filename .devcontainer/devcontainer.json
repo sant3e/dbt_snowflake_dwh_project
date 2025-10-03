@@ -17,7 +17,6 @@
 	"customizations": {
 		"vscode": {
 			"extensions": [
-				"sourcegraph.cody-ai",
 				"donjayamanne.python-extension-pack",
 				"bastienboutonnet.vscode-dbt",
 				"henriblancke.vscode-dbt-formatter",
@@ -28,6 +27,8 @@
 				"wholroyd.jinja",
 				"esbenp.prettier-vscode",
 				"samuelcolvin.jinjahtml",
+				"ms-python.python",
+				"alimtateai.vscode-altimate-mcp-server",
 				"innoverio.vscode-dbt-power-user",
 				"ms-python.black-formatter"
 			]

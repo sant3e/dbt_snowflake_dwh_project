@@ -1,4 +1,4 @@
-imp_poc:
+dbt_snfk:
   target: local_password
   outputs:
     local_password:

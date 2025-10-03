@@ -1,7 +1,7 @@
 WITH raw_data AS (
     SELECT
         sls_ord_num,
-        sls_prd_key,
+        REPLACE(sls_prd_key, '-', '_') AS sls_prd_key,  -- Replace hyphens with underscores (missing from video; required for fct table in gold layer)
         sls_cust_id,
         -- Convert integer date to proper DATE format, handling zero values
         CASE 

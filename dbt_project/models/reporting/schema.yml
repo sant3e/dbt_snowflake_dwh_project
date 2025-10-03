@@ -1,13 +1,107 @@
 version: 2
 
 models:
-  - name: example_reporting_model
-    description: "An example reporting layer model - business-level aggregations and insights (view)"
+  - name: rpt_sales_summary_by_customer
+    description: "Sales summary report grouped by customer information for analytics and segmentation"
     config:
       materialized: view
     columns:
-      - name: id
-        description: "Primary key"
-        tests:
-          - unique
-          - not_null
+      - name: customer_key
+        description: "Surrogate key for the customer dimension"
+        data_type: integer
+      - name: customer_id
+        description: "Natural customer key from source system"
+        data_type: integer
+      - name: first_name
+        description: "Customer first name"
+        data_type: varchar(100)
+      - name: last_name
+        description: "Customer last name"
+        data_type: varchar(100)
+      - name: country
+        description: "Customer country"
+        data_type: varchar(50)
+      - name: gender
+        description: "Customer gender"
+        data_type: varchar(10)
+      - name: marital_status
+        description: "Customer marital status"
+        data_type: varchar(20)
+      - name: total_orders
+        description: "Total number of orders placed by the customer"
+        data_type: integer
+      - name: total_sales
+        description: "Total sales amount for the customer"
+        data_type: decimal(10,2)
+      - name: total_quantity_sold
+        description: "Total quantity of products sold to the customer"
+        data_type: integer
+      - name: avg_order_value
+        description: "Average order value for the customer"
+        data_type: decimal(10,2)
+      - name: first_order_date
+        description: "Date of the customer's first order"
+        data_type: date
+      - name: last_order_date
+        description: "Date of the customer's most recent order"
+        data_type: date
+      - name: days_since_first_order
+        description: "Number of days between first and last order"
+        data_type: integer
+
+  - name: rpt_sales_performance_by_product
+    description: "Sales performance report grouped by product information for product analytics and inventory planning"
+    config:
+      materialized: view
+    columns:
+      - name: product_key
+        description: "Surrogate key for the product dimension"
+        data_type: integer
+      - name: product_id
+        description: "Product ID from source system"
+        data_type: integer
+      - name: product_number
+        description: "Product number for joining with sales fact table"
+        data_type: varchar(255)
+      - name: product_name
+        description: "Product name"
+        data_type: varchar(255)
+      - name: product_line
+        description: "Product line category"
+        data_type: varchar(100)
+      - name: category
+        description: "Category name from ERP"
+        data_type: varchar(100)
+      - name: subcategory
+        description: "Subcategory name from ERP"
+        data_type: varchar(100)
+      - name: cost
+        description: "Product cost"
+        data_type: decimal(10,2)
+      - name: total_orders
+        description: "Total number of orders for the product"
+        data_type: integer
+      - name: total_sales
+        description: "Total sales amount for the product"
+        data_type: decimal(10,2)
+      - name: total_quantity_sold
+        description: "Total quantity of the product sold"
+        data_type: integer
+      - name: avg_sales_per_order
+        description: "Average sales amount per order for the product"
+        data_type: decimal(10,2)
+      - name: avg_unit_price
+        description: "Average unit price for the product"
+        data_type: decimal(10,2)
+      - name: total_cost
+        description: "Total cost of goods sold for the product"
+        data_type: decimal(10,2)
+      - name: total_profit
+        description: "Total profit for the product (sales - cost)"
+        data_type: decimal(10,2)
+      - name: first_sale_date
+        description: "Date of the product's first sale"
+        data_type: date
+      - name: last_sale_date
+        description: "Date of the product's most recent sale"
+        data_type: date

@@ -1,0 +1,173 @@
+version: 2
+
+models:
+  - name: dim_customers
+    description: "Customer dimension table with merged CRM and ERP data"
+    config:
+      materialized: table
+    columns:
+      - name: customer_key
+        description: "Surrogate key for the customer dimension (primary key)"
+        data_type: integer
+      - name: customer_id
+        description: "Natural customer key from source system"
+        data_type: integer
+      - name: customer_number
+        description: "Customer number from source system"
+        data_type: varchar(255)
+      - name: first_name
+        description: "Customer first name"
+        data_type: varchar(100)
+      - name: last_name
+        description: "Customer last name"
+        data_type: varchar(100)
+      - name: country
+        description: "Customer country (standardized)"
+        data_type: varchar(50)
+      - name: marital_status
+        description: "Customer marital status (standardized)"
+        data_type: varchar(20)
+      - name: gender
+        description: "Customer gender (merged from CRM and ERP, standardized)"
+        data_type: varchar(10)
+      - name: birth_date
+        description: "Customer birth date (from ERP, future dates set to NULL)"
+        data_type: date
+      - name: create_date
+        description: "Customer creation date in source system"
+        data_type: date
+      - name: dwh_create_date
+        description: "Date and time when the record was created in the data warehouse"
+        data_type: timestamp
+
+  - name: dim_products
+    description: "Product dimension table with current product information only"
+    config:
+      materialized: table
+    columns:
+      - name: product_key
+        description: "Surrogate key for the product dimension"
+        data_type: integer
+      - name: product_id
+        description: "Product ID from source system"
+        data_type: integer
+      - name: product_number
+        description: "Product number for joining with sales fact table"
+        data_type: varchar(255)
+      - name: product_name
+        description: "Product name"
+        data_type: varchar(255)
+      - name: product_line
+        description: "Product line category"
+        data_type: varchar(100)
+      - name: category_id
+        description: "Category ID from source system"
+        data_type: varchar(50)
+      - name: category
+        description: "Category name from ERP"
+        data_type: varchar(100)
+      - name: subcategory
+        description: "Subcategory name from ERP"
+        data_type: varchar(100)
+      - name: maintenance
+        description: "Maintenance category from ERP"
+        data_type: varchar(50)
+      - name: cost
+        description: "Product cost"
+        data_type: decimal(10,2)
+      - name: start_date
+        description: "Start date for the product record"
+        data_type: date
+      - name: end_date
+        description: "End date for the product record (NULL if current)"
+        data_type: date
+      - name: is_current
+        description: "Flag indicating if this is the current version of the product"
+        data_type: boolean
+      - name: dwh_create_date
+        description: "Date and time when the record was created in the data warehouse"
+        data_type: timestamp
+
+  - name: dim_products_history
+    description: "Historical product dimension table with all versions of products over time"
+    config:
+      materialized: table
+    columns:
+      - name: product_key
+        description: "Surrogate key for the product dimension"
+        data_type: integer
+      - name: product_id
+        description: "Product ID from source system"
+        data_type: integer
+      - name: product_number
+        description: "Product number for joining with sales fact table"
+        data_type: varchar(255)
+      - name: product_name
+        description: "Product name"
+        data_type: varchar(255)
+      - name: product_line
+        description: "Product line category"
+        data_type: varchar(100)
+      - name: category_id
+        description: "Category ID from source system"
+        data_type: varchar(50)
+      - name: category
+        description: "Category name from ERP"
+        data_type: varchar(100)
+      - name: subcategory
+        description: "Subcategory name from ERP"
+        data_type: varchar(100)
+      - name: maintenance
+        description: "Maintenance category from ERP"
+        data_type: varchar(50)
+      - name: cost
+        description: "Product cost"
+        data_type: decimal(10,2)
+      - name: start_date
+        description: "Start date for the product record"
+        data_type: date
+      - name: end_date
+        description: "End date for the product record (NULL if current)"
+        data_type: date
+      - name: is_current
+        description: "Flag indicating if this is the current version of the product"
+        data_type: boolean
+      - name: dwh_create_date
+        description: "Date and time when the record was created in the data warehouse"
+        data_type: timestamp
+
+  - name: fct_sales
+    description: "Sales fact table with measures and foreign keys to dimensions"
+    config:
+      materialized: table
+    columns:
+      - name: order_number
+        description: "Order number from source system"
+        data_type: varchar(50)
+      - name: product_key
+        description: "Foreign key to product dimension"
+        data_type: integer
+      - name: customer_key
+        description: "Foreign key to customer dimension"
+        data_type: integer
+      - name: order_date
+        description: "Date when the order was placed"
+        data_type: date
+      - name: shipping_date
+        description: "Date when the order was shipped"
+        data_type: date
+      - name: due_date
+        description: "Due date for the order"
+        data_type: date
+      - name: sales_amount
+        description: "Total sales amount for the order"
+        data_type: decimal(10,2)
+      - name: quantity
+        description: "Quantity of products sold"
+        data_type: integer
+      - name: sls_price
+        description: "Price per unit"
+        data_type: decimal(10,2)
+      - name: dwh_create_date
+        description: "Date and time when the record was created in the data warehouse"
+        data_type: timestamp

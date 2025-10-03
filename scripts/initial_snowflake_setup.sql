@@ -18,4 +18,5 @@ USE DWH;
 -- Create your schemas (based on new layer architecture)
 CREATE SCHEMA landing;
 CREATE SCHEMA staging;
+CREATE SCHEMA mart;
 CREATE SCHEMA reporting;
