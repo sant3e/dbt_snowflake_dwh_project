@@ -80,13 +80,8 @@ code .
 - VSCode will automatically build the container and install all extensions
 - Wait for the container to build (this may take a few minutes on first run)
 
-### 3. Create Your Personal Environment File
 
-```bash
-cp .env.example .env
-```
-
-### 4. Configure Your Snowflake Credentials
+### 3. Configure Your Snowflake Credentials
 
 **This is the most critical step!** Copy the example environment file and edit it with your actual Snowflake credentials:
 
@@ -100,14 +95,15 @@ Then open and edit the `.env` file with your actual Snowflake credentials:
 nano .env
 ```
 
+If you don't have nano installed, just open the file in VSC.
 Read the `.env.example` file carefully and replace the placeholder values with your actual Snowflake information. For this project, use password authentication by uncommenting and filling in the `SF_USER_PASSWORD` value.
-```
+
 
 **Important Notes:**
 - Your `.env` file contains sensitive credentials - never commit it to Git
 - Ask your team lead for the correct values for your environment
 
-### 5. Set the Correct Target in profiles.yml
+### 4. Set the Correct Target in profiles.yml
 
 Edit the target setting in `dbt_project/profiles.yml` to match your chosen authentication method:
 
@@ -118,7 +114,7 @@ nano dbt_project/profiles.yml
 Change the `target:` line at the top to:
 - `target: local_password` (for password auth)
 
-### 6. Install DBT Packages
+### 5. Install DBT Packages
 
 ```bash
 cd /app/dbt_project
@@ -134,7 +130,7 @@ This installs all required dbt packages including:
 - codegen (code generation helpers)
 - codegen (code generation helpers)
 
-### 7. Test Your Connection
+### 6. Test Your Connection
 
 ```bash
 dbt debug
@@ -165,13 +161,13 @@ Connection:
 - Ensure the target in `profiles.yml` matches your authentication method
 - Ask your team lead for help with Snowflake credentials
 
-### 8. Initialize Snowflake Resources
+### 7. Initialize Snowflake Resources
 
 Before running dbt models, you'll need to set up your Snowflake database and schemas. This project requires a free Snowflake trial account first.
 
 Open the file `scripts/initial_snowflake_setup.sql` in this project, copy the SQL commands, and run them directly in a Snowflake worksheet (Snowsight) to create the required warehouse, database, and schemas.
 
-### 9. Data Ingestion with Seeds
+### 8. Data Ingestion with Seeds
 
 In this dbt project, we use seeds for data ingestion from CSV files. Seeds are dbt's functionality for loading data from external CSV or TSV files directly into database tables. 
 
@@ -188,7 +184,7 @@ dbt seed
 
 This command will read all CSV files from the `seeds/` directory and create corresponding tables in your target schema.
 
-### 10. Start Developing
+### 9. Start Developing
 
 ```bash
 # Run all models - automatically creates schemas and collects metadata
